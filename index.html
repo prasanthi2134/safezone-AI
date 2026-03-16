@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SafeZone AI – Intelligent Disaster Alert System</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- ===== LANDING PAGE ===== -->
+  <section id="landing">
+    <div class="landing-bg">
+      <div class="grid-overlay"></div>
+      <div class="particle" style="--x:10%;--y:20%;--d:4s"></div>
+      <div class="particle" style="--x:80%;--y:15%;--d:6s"></div>
+      <div class="particle" style="--x:50%;--y:70%;--d:5s"></div>
+      <div class="particle" style="--x:25%;--y:80%;--d:7s"></div>
+      <div class="particle" style="--x:90%;--y:60%;--d:4.5s"></div>
+      <div class="particle" style="--x:60%;--y:40%;--d:8s"></div>
+    </div>
+    <nav class="nav">
+      <div class="nav-logo"><i class="fas fa-shield-alt"></i> SafeZone<span>AI</span></div>
+      <div class="nav-links">
+        <a href="#dashboard-section">Dashboard</a>
+        <a href="#" onclick="openChat()">AI Chat</a>
+      </div>
+    </nav>
+    <div class="hero">
+      <div class="hero-badge"><span class="pulse-dot"></span> LIVE MONITORING ACTIVE</div>
+      <h1 class="hero-title">SafeZone <span class="gradient-text">AI</span></h1>
+      <p class="hero-sub">Intelligent Disaster Alert System</p>
+      <p class="hero-desc">Real-time location-based disaster monitoring, emergency alerts, and AI-powered safety guidance — protecting you and your community 24/7.</p>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Monitoring</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">112</span><span class="stat-label">Emergency</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">AI</span><span class="stat-label">Powered</span></div>
+      </div>
+      <button class="cta-btn" onclick="goToDashboard()">
+        <span>Get Started</span>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+    <div class="scroll-indicator" onclick="goToDashboard()">
+      <span>Scroll to Dashboard</span>
+      <i class="fas fa-chevron-down bounce"></i>
+    </div>
+  </section>
+
+  <!-- ===== ALERT BANNER ===== -->
+  <div id="alert-banner" class="alert-banner hidden">
+    <div class="alert-content">
+      <span class="alert-icon">🚨</span>
+      <div>
+        <strong>DISASTER WARNING</strong>
+        <span id="alert-message">Severe conditions detected near your location. Please stay indoors and follow official safety guidance.</span>
+      </div>
+      <button onclick="document.getElementById('alert-banner').classList.add('hidden')"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+
+  <!-- ===== DASHBOARD ===== -->
+  <section id="dashboard-section" class="dashboard">
+    <div class="dash-header">
+      <div class="dash-logo"><i class="fas fa-shield-alt"></i> SafeZone<span>AI</span> Dashboard</div>
+      <div class="dash-status">
+        <span class="pulse-dot"></span> LIVE
+        <span id="last-updated">Updating...</span>
+      </div>
+    </div>
+
+    <!-- TOP ROW: Location + Risk + Weather -->
+    <div class="top-grid">
+
+      <!-- Location Card -->
+      <div class="glass-card location-card">
+        <div class="card-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="card-info">
+          <div class="card-label">YOUR LOCATION</div>
+          <div class="card-value" id="location-name">Detecting...</div>
+          <div class="card-sub" id="location-coords">Fetching coordinates...</div>
+        </div>
+      </div>
+
+      <!-- Risk Level Card -->
+      <div class="glass-card risk-card">
+        <div class="card-label">CURRENT RISK LEVEL</div>
+        <div class="risk-indicator" id="risk-indicator">
+          <div class="risk-circle" id="risk-circle">
+            <span id="risk-text">LOW</span>
+          </div>
+        </div>
+        <div class="risk-bar-wrap">
+          <div class="risk-bar" id="risk-bar"></div>
+        </div>
+        <div class="risk-desc" id="risk-desc">All systems normal. No threats detected.</div>
+      </div>
+
+      <!-- Weather Card -->
+      <div class="glass-card weather-card">
+        <div class="card-label">LIVE WEATHER</div>
+        <div class="weather-main">
+          <span class="weather-icon" id="weather-icon">🌤️</span>
+          <div>
+            <div class="weather-temp" id="weather-temp">--°C</div>
+            <div class="weather-condition" id="weather-condition">Fetching...</div>
+          </div>
+        </div>
+        <div class="weather-grid">
+          <div class="weather-item"><i class="fas fa-tint"></i><span id="humidity">--%</span><label>Humidity</label></div>
+          <div class="weather-item"><i class="fas fa-wind"></i><span id="wind-speed">-- km/h</span><label>Wind</label></div>
+          <div class="weather-item"><i class="fas fa-eye"></i><span id="visibility">-- km</span><label>Visibility</label></div>
+          <div class="weather-item"><i class="fas fa-thermometer-half"></i><span id="feels-like">--°C</span><label>Feels Like</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALERTS ROW -->
+    <div class="glass-card alerts-card">
+      <div class="card-label"><i class="fas fa-bell"></i> ACTIVE DISASTER ALERTS</div>
+      <div id="alerts-list" class="alerts-list">
+        <div class="alert-item safe"><i class="fas fa-check-circle"></i> No active alerts in your area. Stay prepared.</div>
+      </div>
+    </div>
+
+    <!-- MAP + EMERGENCY ROW -->
+    <div class="mid-grid">
+
+      <!-- Map -->
+      <div class="glass-card map-card">
+        <div class="card-label"><i class="fas fa-map"></i> YOUR LOCATION MAP</div>
+        <div id="map-container">
+          <iframe id="map-frame" src="" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          <div id="map-placeholder" class="map-placeholder">
+            <i class="fas fa-map-marked-alt"></i>
+            <p>Detecting your location...</p>
+          </div>
+        </div>
+        <div class="map-actions">
+          <button class="map-btn hospital" onclick="openMaps('hospital')"><i class="fas fa-hospital"></i> Hospitals</button>
+          <button class="map-btn police" onclick="openMaps('police')"><i class="fas fa-shield-alt"></i> Police</button>
+          <button class="map-btn fire" onclick="openMaps('fire_station')"><i class="fas fa-fire-extinguisher"></i> Fire Station</button>
+          <button class="map-btn shelter" onclick="openMaps('shelter')"><i class="fas fa-home"></i> Shelters</button>
+        </div>
+      </div>
+
+      <!-- Emergency Panel -->
+      <div class="glass-card emergency-card">
+        <div class="card-label"><i class="fas fa-phone-alt"></i> EMERGENCY RESPONSE</div>
+        <div class="emergency-grid">
+          <div class="emg-card" onclick="callEmergency()">
+            <div class="emg-icon red"><i class="fas fa-phone"></i></div>
+            <div class="emg-label">Call 112</div>
+            <div class="emg-sub">National Emergency</div>
+          </div>
+          <div class="emg-card" onclick="openMaps('hospital')">
+            <div class="emg-icon blue"><i class="fas fa-hospital"></i></div>
+            <div class="emg-label">Hospital</div>
+            <div class="emg-sub">Find Nearest</div>
+          </div>
+          <div class="emg-card" onclick="openMaps('police')">
+            <div class="emg-icon yellow"><i class="fas fa-shield-alt"></i></div>
+            <div class="emg-label">Police</div>
+            <div class="emg-sub">Find Station</div>
+          </div>
+          <div class="emg-card" onclick="openMaps('fire_station')">
+            <div class="emg-icon orange"><i class="fas fa-fire"></i></div>
+            <div class="emg-label">Fire Station</div>
+            <div class="emg-sub">Find Nearest</div>
+          </div>
+          <div class="emg-card" onclick="openMaps('evacuation+shelter')">
+            <div class="emg-icon green"><i class="fas fa-home"></i></div>
+            <div class="emg-label">Shelter</div>
+            <div class="emg-sub">Evacuation Point</div>
+          </div>
+          <div class="emg-card" onclick="openMaps('ambulance')">
+            <div class="emg-icon teal"><i class="fas fa-ambulance"></i></div>
+            <div class="emg-label">Ambulance</div>
+            <div class="emg-sub">Medical Help</div>
+          </div>
+        </div>
+
+        <!-- Safety Tips -->
+        <div class="card-label mt" style="margin-top:20px"><i class="fas fa-lightbulb"></i> SAFETY RECOMMENDATIONS</div>
+        <div id="safety-tips" class="safety-tips">
+          <div class="tip"><i class="fas fa-check"></i> Keep emergency contacts saved offline</div>
+          <div class="tip"><i class="fas fa-check"></i> Maintain a 72-hour emergency supply kit</div>
+          <div class="tip"><i class="fas fa-check"></i> Know your nearest evacuation route</div>
+          <div class="tip"><i class="fas fa-check"></i> Stay tuned to local weather updates</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <span>© 2026 SafeZone AI — Built with Google AI Studio & Gemini API</span>
+      <span>Powered by Vibe Coding 🚀</span>
+    </div>
+  </section>
+
+  <!-- ===== AI CHATBOT ===== -->
+  <div id="chat-bubble" class="chat-bubble" onclick="openChat()">
+    <i class="fas fa-robot"></i>
+    <span class="chat-badge">AI</span>
+  </div>
+
+  <div id="chat-window" class="chat-window hidden">
+    <div class="chat-header">
+      <div><i class="fas fa-robot"></i> SafeZone AI Assistant</div>
+      <div class="chat-header-actions">
+        <span class="chat-status"><span class="pulse-dot"></span> Online</span>
+        <button onclick="closeChat()"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg bot">
+        <div class="msg-bubble">👋 Hello! I'm your SafeZone AI assistant. Ask me anything about disaster safety!<br><br>
+        <div class="quick-btns">
+          <button onclick="quickAsk('What should I do during a flood?')">🌊 Flood Safety</button>
+          <button onclick="quickAsk('How to prepare for a cyclone?')">🌀 Cyclone Prep</button>
+          <button onclick="quickAsk('What to do during an earthquake?')">🌍 Earthquake</button>
+          <button onclick="quickAsk('How to make an emergency kit?')">🎒 Emergency Kit</button>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chat-input" placeholder="Ask about disaster safety..." onkeydown="if(event.key==='Enter') sendChat()"/>
+      <button onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
