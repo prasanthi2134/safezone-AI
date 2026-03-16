@@ -6,7 +6,7 @@ An AI-powered real-time disaster monitoring platform built **entirely using AI t
 and vibe coding** — zero manual coding. Just ideas, prompts, and results.
 
 ## 🌐 Live Demo
-👉 [Click here to view live](https://prasanthi2134.github.io/safezone-ai)
+👉Click here  https://prasanthi2134.github.io/safezone-AI/
 
 ---
 
